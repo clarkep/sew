@@ -8,7 +8,7 @@ Sew creates binary files from annotated text files. For example,
 will compile to two byte binary file `0xabcd` 
 
 ## Build:
-``gcc -o sew sew.c``
+``cc -o sew sew.c``
 
 ## Run:
 ``./sew -o test test.sew``
