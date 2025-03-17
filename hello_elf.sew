@@ -1,0 +1,75 @@
+;
+; Hello, world for x86_64 ELF
+; Created 3/17/2025
+;
+
+; ELF Header:
+; typedef struct {
+;     unsigned char e_ident[EI_NIDENT];
+;     uint16_t      e_type;
+;     uint16_t      e_machine;
+;     uint32_t      e_version;
+;     ElfN_Addr     e_entry;
+;     ElfN_Off      e_phoff;
+;     ElfN_Off      e_shoff;
+;     uint32_t      e_flags;
+;     uint16_t      e_ehsize;
+;     uint16_t      e_phentsize;
+;     uint16_t      e_phnum;
+;     uint16_t      e_shentsize;
+;     uint16_t      e_shnum;
+;     uint16_t      e_shstrndx;
+; } ElfN_Ehdr;
+7f45 4c46 ; magic number: 0x7f 'E' 'L' 'F'
+02 ; ei_class: 02=64 bits
+01 ; ei_data: 01=2's complement, little endian
+01 ; ei_version: 01=version 1, the only version
+00 ; ei_osabi: 00=UNIX System V ABI
+00 ; ei_abiversion: always 0 for System V
+00 0000 0000 0000 ; pad to 16 bytes, together these are "e_ident"
+0200 ; e_type: 02=Executable file
+3e00 ; e_machine: 3e=x86_64
+0100 0000 ; e_version: 01=again the only version
+7800 4000 0000 0000 ; e_entry: the entry point of the program
+4000 0000 0000 0000 ; e_phoff: offset of the program header table
+0000 0000 0000 0000 ; e_shoff: offset of the section header table, 0 for none
+0000 0000 ; e_flags: "Currently, no flags have been defined"[1]
+4000 ; e_ehsize: Elf header size
+3800 ; e_phentsize: program header entry size
+0100 ; e_phnum: number of program header entries
+0000 ; e_shentsize: section header entry size
+0000 ; e_shnum
+0000 ; e_shstrndx: section header table index of the section name string table
+
+; Program, or segment, header
+;  typedef struct {
+;     uint32_t   p_type;
+;     uint32_t   p_flags;
+;     Elf64_Off  p_offset;
+;     Elf64_Addr p_vaddr;
+;     Elf64_Addr p_paddr;
+;     uint64_t   p_filesz;
+;     uint64_t   p_memsz;
+;     uint64_t   p_align;
+; } Elf64_Phdr;
+0100 0000 ; p_type: 01=Loadable program segment
+0700 0000 ; p_flags: 07=readable, writeable, and executable
+0000 0000 0000 0000 ; p_offset: offset in the file of this segment(the beginning, because 
+                    ; it contains the whole file)
+0000 4000 0000 0000 ; p_vaddr: virtual address where the segment will be loaded
+0000 4000 0000 0000 ; p_paddr: physical address where the segment will be loaded. XXX add note
+a800 0000 0000 0000 ; p_filesz: size of the segment in the file, in bytes
+a800 0000 0000 0000 ; p_memsz: size of the loaded segment, in bytes
+0010 0000 0000 0000 ; p_align: value to which the segment is aligned in memory and in the file
+
+; Code:
+bf01 0000 00                  ; mov edi,0x1
+48 be 9a 00 40 00 00 00 00 00 ; movabs rsi,0x40009a ; (address of string)
+ba 0e 00 00 00                ; mov edx,14
+b8 01 00 00 00                ; mov eax,1
+0f 05                         ; syscall 
+b8 3c 00 00 00                ; mov eax,60
+0f 05                         ; syscall 
+
+; hello, world!\n
+68 65 6c 6c 6f 2c 20 77 6f 72 6c 64 21 0a 
