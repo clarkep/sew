@@ -57,7 +57,8 @@
 0000 0000 0000 0000 ; p_offset: offset in the file of this segment(the beginning, because 
                     ; it contains the whole file)
 0000 4000 0000 0000 ; p_vaddr: virtual address where the segment will be loaded
-0000 4000 0000 0000 ; p_paddr: physical address where the segment will be loaded. XXX add note
+0000 4000 0000 0000 ; p_paddr: physical address where the segment will be loaded, ignored by
+                    ; System V ABI systems[3].
 a800 0000 0000 0000 ; p_filesz: size of the segment in the file, in bytes
 a800 0000 0000 0000 ; p_memsz: size of the loaded segment, in bytes
 0010 0000 0000 0000 ; p_align: value to which the segment is aligned in memory and in the file
@@ -73,3 +74,13 @@ b8 3c 00 00 00                ; mov eax,60
 
 ; hello, world!\n
 68 65 6c 6c 6f 2c 20 77 6f 72 6c 64 21 0a 
+
+
+; Refs:
+; The ELF format is defined in many places:
+; [1] elf(5), Linux man-pages, convenient reference for struct definitions
+; [2] <elf.h>, GNU C Library, convenient reference for constant values
+; [3] System V ABI Reference, Chapter 4: Object Files. https://www.sco.com/developers/devspecs/gabi41.pdf
+; Architecture specific details are specified in two processor supplements:
+; [4] Intel386 Architecture Processor Supplement. https://raw.githubusercontent.com/wiki/hjl-tools/x86-psABI/intel386-psABI-1.1.pdf
+; [5] AMD64 Architecture Processor Supplement. https://raw.githubusercontent.com/wiki/hjl-tools/x86-psABI/x86-64-psABI-1.0.pdf
