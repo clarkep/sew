@@ -1,0 +1,17 @@
+fabcafe0
+
+.format hex_little
+1000
+afcbfa0e
+
+.format binary
+; 0x88
+10001000
+; 0x2f
+0010 1111
+
+.format binary_little
+; 0x11
+10001000
+; 0x2f
+1111 0100 
