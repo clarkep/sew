@@ -77,7 +77,7 @@ b8 3c 00 00 00                ; mov eax,60
 
 
 ; Refs:
-; The ELF format is defined in many places:
+; The ELF format is documented in many places:
 ; [1] elf(5), Linux man-pages, convenient reference for struct definitions
 ; [2] <elf.h>, GNU C Library, convenient reference for constant values
 ; [3] System V ABI Reference, Chapter 4: Object Files. https://www.sco.com/developers/devspecs/gabi41.pdf
