@@ -70,7 +70,7 @@ const char *usage = "usage: sew [-o outfile] infile\n";
 
 int main(int argc, char **argv)
 {
-    char *infile, *outfile = NULL;
+    char *infile = NULL, *outfile = NULL;
     for (int i=1; i<argc; i++) {
         if (argv[i][0] == '-') {
             switch (argv[i][1]) {
