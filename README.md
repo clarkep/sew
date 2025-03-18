@@ -2,10 +2,13 @@
 Sew creates binary files from annotated text files. For example,
 ```
 .format binary
-; ab cd
-10101011110011011101 
+; two bytes, each byte most-significant bit first
+10101011 11001101
+.format binary_little
+; two bytes, each byte least-significant bit first
+10000100 11000010
 ```
-will compile to two byte binary file `0xabcd` 
+will compile to the two byte binary file conventionally written: `0xab 0xcd 0x21 0x43` 
 
 ## Build:
 ``cc -o sew sew.c``
