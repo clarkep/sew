@@ -66,6 +66,8 @@ enum mode {
     MODE_BINARY_LITTLE,
 };
 
+const char *usage = "usage: sew [-o outfile] infile\n";
+
 int main(int argc, char **argv)
 {
     char *infile, *outfile = NULL;
@@ -73,6 +75,7 @@ int main(int argc, char **argv)
         if (argv[i][0] == '-') {
             switch (argv[i][1]) {
                 case 'o':
+                    if (i+1 >= argc) errexit(usage);
                     outfile = argv[i+1];
                     i++;
                     break;
@@ -81,6 +84,7 @@ int main(int argc, char **argv)
             infile = argv[i];
         }
     }
+    if (!infile) errexit(usage);
     FILE *in = fopen(infile, "r");
     if (!in) errexit ("Failed to open %s.\n", infile);
     if (!outfile) outfile = "a.out";
