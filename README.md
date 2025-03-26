@@ -1,5 +1,5 @@
 # Sew
-Sew creates binary files from annotated text files. For example,
+Sew creates binary files from text files. For example,
 ```
 .format binary
 ; two bytes, each byte most-significant bit first
